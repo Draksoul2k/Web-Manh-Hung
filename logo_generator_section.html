@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiết Kế Logo & Bộ Nhận Diện Chuyên Nghiệp</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================================================
+           DESIGN SYSTEM & BASE STYLE FOR THE LOGO GENERATOR SECTION
+           ========================================================================== */
+        :root {
+            --primary-color: #ff3366; /* Vibrant pink/red gradient primary */
+            --primary-gradient: linear-gradient(135deg, #ff3366 0%, #c1121f 100%);
+            --gold-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --bg-dark: #0f1016; /* Deep dark background matching the screenshot */
+            --bg-card: #181922; /* Sleek slate glass card background */
+            --text-light: #ffffff;
+            --text-muted: #a0aec0;
+            --text-dark: #1a202c;
+            --border-color: #2d3748;
+            --border-radius: 12px;
+            --border-radius-lg: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #logo-generator-section-container {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Outfit', 'Montserrat', sans-serif;
+            padding: 80px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        #logo-generator-section-container * {
+            box-sizing: border-box;
+        }
+
+        /* Container & Grid layout */
+        .section-wrapper {
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        @media (max-width: 992px) {
+            .section-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        /* Left Column Style (Hero/Mockup Info) */
+        .hero-info-column {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .brand-tagline {
+            color: var(--primary-color);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .hero-title span {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* Mockup Image Style */
+        .mockup-image-container {
+            width: 100%;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            margin-top: 15px;
+            transition: var(--transition);
+        }
+
+        .mockup-image-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 50px rgba(255, 51, 102, 0.1);
+        }
+
+        .mockup-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Right Column Style (Free Consultation Form) */
+        .form-column {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        @media (max-width: 576px) {
+            .form-column {
+                padding: 25px 20px;
+            }
+        }
+
+        .form-column h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin: 0 0 8px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .form-column p.form-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+            line-height: 1.5;
+            margin: 0 0 30px 0;
+        }
+
+        /* Form Inputs Style */
+        .generator-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .form-group-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 480px) {
+            .form-group-row {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .form-group label span.required {
+            color: var(--primary-color);
+        }
+
+        .form-input {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 12px 16px;
+            color: var(--text-light);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .form-input::placeholder {
+            color: #5a6578;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background-color: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.15);
+        }
+
+        select.form-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a0aec0'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 16px;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+
+        textarea.form-input {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .form-required-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* Action Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 14px 28px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: var(--text-light);
+            box-shadow: 0 4px 15px rgba(255, 51, 102, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 51, 102, 0.5);
+            opacity: 0.95;
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background: var(--gold-gradient);
+            color: var(--text-light);
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.3);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(217, 119, 6, 0.5);
+            opacity: 0.95;
+        }
+
+        .form-footer-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.5;
+            margin: 10px 0 0 0;
+        }
+
+        .form-footer-desc a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .form-footer-desc a:hover {
+            text-decoration: underline;
+        }
+
+        /* ==========================================================================
+           MODALS STYLE (LOADING & SUCCESS DIALOGS)
+           ========================================================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(7, 8, 12, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(8px);
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 4px solid var(--primary-color);
+            border-radius: var(--border-radius-lg);
+            width: 100%;
+            max-width: 550px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            transform: scale(0.9);
+            transition: var(--transition);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            line-height: 1;
+            transition: var(--transition);
+            user-select: none;
+        }
+
+        .modal-close:hover {
+            color: var(--text-light);
+        }
+
+        .modal-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(255, 51, 102, 0.1);
+            color: var(--primary-color);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .modal-container h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+        }
+
+        .modal-container p.modal-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0 0 25px 0;
+        }
+
+        /* Success Checkmark green variant */
+        .modal-container.success-mode {
+            border-top-color: #10b981;
+        }
+
+        .modal-container.success-mode .modal-icon {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 51, 102, 0.1);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            display: inline-block;
+            animation: spin 1s infinite linear;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ==========================================================================
+           DYNAMIC LOGO GRID & SVG CARDS
+           ========================================================================== */
+        #logoPreviewGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+            padding: 5px;
+            max-height: 420px;
+            overflow-y: auto;
+        }
+
+        .logo-option-card {
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            background: #1e202c;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 250px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo-option-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 8px 16px rgba(16, 185, 129, 0.08);
+        }
+
+        .logo-option-card.selected {
+            border-color: #10b981;
+            background-color: #112720;
+        }
+
+        /* Svg elements inside the wrapper MUST scale correctly without being clipped */
+        .svg-wrapper {
+            width: 100%;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            pointer-events: none; /* Let clicks pass to the card */
+        }
+
+        .svg-wrapper svg {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            display: block;
+        }
+
+        /* Lead Summary Box */
+        .modal-summary {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: var(--border-radius);
+            padding: 18px;
+            text-align: left;
+            margin-top: 25px;
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-summary h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin: 0 0 12px 0;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .summary-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .summary-row span:first-child {
+            color: var(--text-muted);
+        }
+
+        .summary-row span:last-child {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div id="logo-generator-section-container">
+    <div class="section-wrapper">
+        
+        <!-- Left Column: Hero & Mockup image -->
+        <div class="hero-info-column">
+            <div class="mockup-image-container">
+                <img src="assets/brand_identity_mockup.png" alt="Bộ nhận diện thương hiệu chuyên nghiệp">
+            </div>
+            <span class="brand-tagline">Vũ khí định vị thương hiệu</span>
+            <h2 class="hero-title">Thiết Kế Logo & <span>Bộ Nhận Diện</span> Chuyên Nghiệp</h2>
+            <p class="hero-subtitle">Chúng tôi không chỉ vẽ logo – chúng tôi xây dựng vị thế thương hiệu vững chắc, tối ưu chi phí và bùng nổ chuyển đổi doanh số cho Startup và Cửa hàng của bạn.</p>
+        </div>
+        
+        <!-- Right Column: Consultation and AI generator form -->
+        <div class="form-column">
+            <h3>NHẬN TƯ VẤN THIẾT KẾ MIỄN PHÍ</h3>
+            <p class="form-desc">Điền ý tưởng của bạn dưới đây để nhận phác thảo mẫu logo nhanh chóng</p>
+            
+            <form id="logoGeneratorForm" class="generator-form">
+                <!-- Contact Info -->
+                <div class="form-group">
+                    <label for="clientName">Họ & tên khách hàng <span class="required">*</span></label>
+                    <input type="text" id="clientName" class="form-input" placeholder="Nhập họ và tên của bạn" required>
+                </div>
+                
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="clientPhone">Số điện thoại <span class="required">*</span></label>
+                        <input type="tel" id="clientPhone" class="form-input" placeholder="Ví dụ: 0859582982" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientEmail">Email <span class="required">*</span></label>
+                        <input type="email" id="clientEmail" class="form-input" placeholder="Ví dụ: name@gmail.com" required>
+                    </div>
+                </div>
+                
+                <!-- Row 1: Brand name & Slogan -->
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="logoName">Tên logo mong muốn <span class="required">*</span></label>
+                        <input type="text" id="logoName" class="form-input" placeholder="Ví dụ: Hung Manh Brand" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="logoSlogan">Slogan kèm theo logo (nếu có)</label>
+                        <input type="text" id="logoSlogan" class="form-input" placeholder="Ví dụ: Định vị thương hiệu chuyên nghiệp">
+                    </div>
+                </div>
+                
+                <!-- Textarea: Ideas -->
+                <div class="form-group">
+                    <label for="logoIdeas">Mô tả ý tưởng hoặc yêu cầu đặc biệt</label>
+                    <textarea id="logoIdeas" class="form-input" placeholder="Ví dụ: Tôi muốn biểu tượng có hình cánh chim bay lên kết hợp với chiếc lá để phát triển xanh..."></textarea>
+                </div>
+                
+                <p class="form-required-note">(*) Thông tin bắt buộc</p>
+                
+                <!-- Submit -->
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Tạo logo ngay
+                </button>
+                
+                <p class="form-footer-desc">Khi bấm vào nút TẠO LOGO NGAY, bạn đồng ý nhận tư vấn miễn phí qua số điện thoại và tuân thủ <a href="#">Chính sách Bảo mật</a> của chúng tôi.</p>
+            </form>
+        </div>
+        
+    </div>
+</div>
+
+<!-- ==========================================================================
+   LOADING MODAL
+   ========================================================================== -->
+<div class="modal-overlay" id="loadingModal">
+    <div class="modal-container" style="max-width: 480px;">
+        <div class="spinner"></div>
+        <h3>Đang thiết kế logo...</h3>
+        <p class="modal-desc" style="margin-bottom: 0;">Hệ thống Hùng Mạnh Brand đang thiết kế logo cho bạn, việc này mất khoảng 30-45 giây. Vui lòng không đóng trình duyệt.</p>
+    </div>
+</div>
+
+<!-- ==========================================================================
+   SUCCESS & PREVIEW MODAL
+   ========================================================================== -->
+<div class="modal-overlay" id="successModal">
+    <div class="modal-container success-mode" style="max-width: 800px;">
+        <div class="modal-close" id="closeSuccessBtn">&times;</div>
+        <div class="modal-icon"><i class="fa-solid fa-check"></i></div>
+        <h3>Thiết kế logo thành công!</h3>
+        <p class="modal-desc">AI của Hùng Mạnh Brand đã phác thảo <strong>3 phương án thiết kế độc quyền</strong> cho bạn bên dưới. Hãy click chọn mẫu bạn ưng ý nhất để tải xuống hoặc nhận bản vẽ gốc.</p>
+        
+        <!-- Grid for SVGs -->
+        <div id="logoPreviewGrid">
+            <!-- Dynamically populated -->
+        </div>
+        
+        <!-- Actions buttons -->
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 15px;">
+            <button type="button" id="downloadJpgBtn" class="btn btn-primary" style="flex: 1; min-width: 180px;">
+                <i class="fa-solid fa-download"></i> Tải xuống Logo (JPG)
+            </button>
+            <button type="button" id="regenerateBtn" class="btn btn-secondary" style="flex: 1; min-width: 180px;">
+                <i class="fa-solid fa-rotate"></i> Tạo lại mẫu khác
+            </button>
+            <a href="https://zalo.me/0859582982" id="zaloContactBtn" target="_blank" class="btn btn-gold" style="flex: 1; min-width: 180px; text-decoration: none;">
+                <i class="fa-solid fa-comment-dots"></i> Liên hệ thiết kế
+            </a>
+        </div>
+        
+        <!-- Customer Summary -->
+        <div class="modal-summary">
+            <h4>Thông tin yêu cầu:</h4>
+            <div class="summary-row">
+                <span>Tên logo:</span>
+                <span id="sumLogoName">-</span>
+            </div>
+            <div class="summary-row">
+                <span>Slogan:</span>
+                <span id="sumSlogan">-</span>
+            </div>
+            <div class="summary-row">
+                <span>Khách hàng:</span>
+                <span id="sumName">-</span>
+            </div>
+            <div class="summary-row">
+                <span>Điện thoại:</span>
+                <span id="sumPhone">-</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==========================================================================
+   FORM & INTERACTION JAVASCRIPT LOGIC
+   ========================================================================== -->
+<script>
+    // ==========================================================================
+    // API BASE URL CONFIGURATION
+    // Set this variable to your server's host if calling APIs across different domains.
+    // Example: const API_BASE_URL = 'http://localhost:8080';
+    // ==========================================================================
+    const API_BASE_URL = ''; 
+
+    // DOM Elements
+    const logoGeneratorForm = document.getElementById('logoGeneratorForm');
+    const loadingModal = document.getElementById('loadingModal');
+    const successModal = document.getElementById('successModal');
+    const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+    
+    const logoPreviewGrid = document.getElementById('logoPreviewGrid');
+    const downloadJpgBtn = document.getElementById('downloadJpgBtn');
+    const regenerateBtn = document.getElementById('regenerateBtn');
+    
+    // Details summary elements
+    const sumLogoName = document.getElementById('sumLogoName');
+    const sumSlogan = document.getElementById('sumSlogan');
+    const sumName = document.getElementById('sumName');
+    const sumPhone = document.getElementById('sumPhone');
+    
+    // State variables
+    let generatedLogos = [];
+    let selectedLogoIndex = 0;
+    let currentSvgCode = '';
+    
+    // Handle form submit to call AI generator
+    logoGeneratorForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        await generateLogo();
+    });
+    
+    // Core function to make API request and retrieve SVGs
+    async function generateLogo() {
+        // Collect form data
+        const logoName = document.getElementById('logoName').value.trim();
+        const slogan = document.getElementById('logoSlogan').value.trim();
+        const ideas = document.getElementById('logoIdeas').value.trim();
+        const clientName = document.getElementById('clientName').value.trim();
+        const clientPhone = document.getElementById('clientPhone').value.trim();
+        const clientEmail = document.getElementById('clientEmail').value.trim();
+        
+        // Show loading screen
+        showModal(loadingModal);
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/generate-logo`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    logoName, slogan, ideas, clientName,
+                    clientPhone, clientEmail
+                })
+            });
+            
+            const result = await response.json();
+            hideModal(loadingModal);
+            
+            if (result.success && result.logos && result.logos.length > 0) {
+                generatedLogos = result.logos;
+                
+                // Populate details summary
+                sumLogoName.textContent = logoName;
+                sumSlogan.textContent = slogan || 'Không có';
+                sumName.textContent = clientName;
+                sumPhone.textContent = clientPhone;
+                
+                // Display option cards
+                renderLogoOptions();
+                showModal(successModal);
+            } else {
+                const apiErr = result.error || 'Gemini API không phản hồi hoặc đã quá tải.';
+                showFallbackMessage(apiErr, logoName, slogan, ideas, clientName, clientPhone, clientEmail);
+            }
+            
+        } catch (error) {
+            hideModal(loadingModal);
+            console.error("AI Generation Error:", error);
+            showFallbackMessage(error.message, logoName, slogan, ideas, clientName, clientPhone, clientEmail);
+        }
+    }
+    
+    // Draw SVG logos onto the preview cards
+    function renderLogoOptions() {
+        logoPreviewGrid.innerHTML = '';
+        selectedLogoIndex = 0;
+        currentSvgCode = generatedLogos[0];
+        
+        generatedLogos.forEach((svg, index) => {
+            const card = document.createElement('div');
+            card.className = `logo-option-card ${index === 0 ? 'selected' : ''}`;
+            card.setAttribute('data-index', index);
+            
+            card.innerHTML = `
+                <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; width: 100%; display: flex; justify-content: space-between; user-select: none;">
+                    <span>MẪU SỐ ${index + 1}</span>
+                    <span class="select-badge" style="color: #10b981; display: ${index === 0 ? 'inline' : 'none'};">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </span>
+                </div>
+                <div class="svg-wrapper">
+                    ${svg}
+                </div>
+            `;
+            
+            // Set dynamic card active click selectors
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.logo-option-card').forEach(c => {
+                    c.classList.remove('selected');
+                    c.querySelector('.select-badge').style.display = 'none';
+                });
+                
+                card.classList.add('selected');
+                card.querySelector('.select-badge').style.display = 'inline';
+                selectedLogoIndex = index;
+                currentSvgCode = svg;
+            });
+            
+            logoPreviewGrid.appendChild(card);
+        });
+        
+        downloadJpgBtn.style.display = 'inline-flex';
+    }
+    
+    // Fallback error handler (Submit leads even if Gemini is rate limited/failed)
+    function showFallbackMessage(errorMsg, logoName, slogan, ideas, name, phone, email) {
+        logoPreviewGrid.innerHTML = `
+            <div style="text-align: center; color: var(--text-muted); padding: 25px; grid-column: 1 / -1;">
+                <i class="fa-solid fa-circle-exclamation" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 12px;"></i>
+                <p style="font-weight: 700; color: var(--text-light); margin: 0 0 5px 0;">Thông tin của bạn đã được gửi thành công!</p>
+                <p style="font-size: 0.85rem; line-height: 1.5; margin: 0;">Mẫu vẽ AI đang quá tải (${errorMsg}). Nhân viên thiết kế của Hùng Mạnh Brand sẽ liên hệ qua Zalo gửi bản phác thảo sớm nhất cho bạn.</p>
+            </div>
+        `;
+        
+        sumLogoName.textContent = logoName;
+        sumSlogan.textContent = slogan || 'Không có';
+        sumName.textContent = name;
+        sumPhone.textContent = phone;
+        
+        downloadJpgBtn.style.display = 'none';
+        showModal(successModal);
+        
+        // Auto register fallback lead webhook call
+        submitFallbackLead(logoName, slogan, ideas, name, phone, email, 'Chưa chọn (Lỗi vẽ AI)');
+    }
+    
+    // Submit lead helper on fallback
+    async function submitFallbackLead(logoName, slogan, ideas, name, phone, email, selectedLogo) {
+        try {
+            await fetch(`${API_BASE_URL}/api/submit-lead`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name, phone, email, logoName, slogan, ideas,
+                    selectedLogo,
+                    svgCode: '',
+                    jpgBase64: ''
+                })
+            });
+        } catch (ex) {
+            console.error("Fallback Lead submit failed:", ex);
+        }
+    }
+    
+    // Download JPG trigger with Base64 rasterization and lead submission
+    downloadJpgBtn.addEventListener('click', () => {
+        if (!currentSvgCode) return;
+        
+        // Disable button while processing
+        downloadJpgBtn.disabled = true;
+        downloadJpgBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang nén...';
+        
+        // Convert SVG code string to Base64 data URI
+        const svgBlob = new Blob([currentSvgCode], { type: 'image/svg+xml;charset=utf-8' });
+        const URL = window.URL || window.webkitURL || window;
+        const blobURL = URL.createObjectURL(svgBlob);
+        
+        const image = new Image();
+        image.onload = () => {
+            // Create target square canvas
+            const canvas = document.createElement('canvas');
+            canvas.width = 1200; // High-res 1200x1200px export
+            canvas.height = 1200;
+            const ctx = canvas.getContext('2d');
+            
+            // Draw background fill as white (transparency defaults to black on JPEG)
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, 1200, 1200);
+            
+            // Draw SVG
+            ctx.drawImage(image, 0, 0, 1200, 1200);
+            
+            // Convert to lightweight JPG (85% compression quality)
+            const jpgDataUrl = canvas.toDataURL('image/jpeg', 0.85);
+            
+            // Trigger browser download client download
+            const downloadLink = document.createElement('a');
+            const fileName = `HungManh_Logo_${document.getElementById('logoName').value.trim()}_Option${selectedLogoIndex + 1}.jpg`;
+            downloadLink.href = jpgDataUrl;
+            downloadLink.download = fileName;
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            
+            // Extract raw base64 data to send to server sheet webhook
+            const base64Data = jpgDataUrl.split(',')[1];
+            
+            // Dispatch lead registration to sheets webhook
+            dispatchLeadSubmission(base64Data);
+        };
+        
+        image.src = blobURL;
+    });
+    
+    // Dispatch lead submission payload to server
+    async function dispatchLeadSubmission(jpgBase64) {
+        const logoName = document.getElementById('logoName').value.trim();
+        const slogan = document.getElementById('logoSlogan').value.trim();
+        const clientName = document.getElementById('clientName').value.trim();
+        const clientPhone = document.getElementById('clientPhone').value.trim();
+        const clientEmail = document.getElementById('clientEmail').value.trim();
+        const selectedLogoName = `Mẫu số ${selectedLogoIndex + 1}`;
+        
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/submit-lead`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: clientName,
+                    phone: clientPhone,
+                    email: clientEmail,
+                    logoName,
+                    slogan,
+                    ideas: document.getElementById('logoIdeas').value,
+                    selectedLogo: selectedLogoName,
+                    svgCode: currentSvgCode,
+                    jpgBase64: jpgBase64
+                })
+            });
+            
+            const res = await response.json();
+            console.log("Lead webhook submission response:", res);
+        } catch (ex) {
+            console.error("Lead webhook submission failed:", ex);
+        } finally {
+            // Restore button state
+            downloadJpgBtn.disabled = false;
+            downloadJpgBtn.innerHTML = '<i class="fa-solid fa-download"></i> Tải xuống Logo (JPG)';
+        }
+    }
+    
+    // Regenerate Btn Callback
+    regenerateBtn.addEventListener('click', async () => {
+        hideModal(successModal);
+        await generateLogo();
+    });
+    
+    // Modal Helpers
+    function showModal(modal) {
+        if (modal) modal.classList.add('active');
+    }
+    
+    // Close modal function
+    function hideModal(modal) {
+        if (modal) modal.classList.remove('active');
+    }
+    
+    if (closeSuccessBtn) closeSuccessBtn.addEventListener('click', () => hideModal(successModal));
+    
+    // Close modal if background is clicked
+    [loadingModal, successModal].forEach(modal => {
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal && modal !== loadingModal) {
+                    hideModal(modal);
+                }
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
