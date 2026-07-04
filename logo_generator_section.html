@@ -121,6 +121,92 @@
             display: block;
         }
 
+        .logo-live-preview {
+            width: 100%;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--border-color);
+            background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            margin-top: 15px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .logo-live-stage {
+            min-height: 520px;
+            border-radius: calc(var(--border-radius-lg) - 6px);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+            overflow: hidden;
+        }
+
+        .logo-live-stage .empty-state {
+            text-align: center;
+            color: var(--text-muted);
+            max-width: 320px;
+        }
+
+        .logo-live-stage .empty-state i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .logo-live-stage svg {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+        }
+
+        .logo-live-options {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .logo-live-options .logo-option-card {
+            padding: 10px;
+            margin: 0;
+            min-height: 170px;
+        }
+
+        .logo-live-options .svg-wrapper {
+            height: 120px;
+        }
+
+        .logo-live-options .logo-option-card .select-badge {
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 576px) {
+            .logo-live-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .live-preview-actions {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        @media (max-width: 576px) {
+            .live-preview-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .live-preview-actions .btn {
+            min-width: 0;
+        }
+
         /* Right Column Style (Free Consultation Form) */
         .form-column {
             background-color: var(--bg-card);
@@ -526,8 +612,26 @@
         
         <!-- Left Column: Hero & Mockup image -->
         <div class="hero-info-column">
-            <div class="mockup-image-container">
-                <img src="assets/brand_identity_mockup.png" alt="Bộ nhận diện thương hiệu chuyên nghiệp">
+            <div class="logo-live-preview">
+                <div class="logo-live-stage" id="liveLogoStage">
+                    <div class="empty-state">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <h3 style="margin: 0 0 6px 0; color: var(--text-light);">Logo sẽ hiện ở đây</h3>
+                        <p style="margin: 0; font-size: 0.92rem; line-height: 1.6;">Nhập thông tin và bấm tạo logo, kết quả sẽ hiển thị trực tiếp bên trái thay vì bật khung popup.</p>
+                    </div>
+                </div>
+                <div id="liveLogoOptions" class="logo-live-options"></div>
+                <div class="live-preview-actions">
+                    <a href="https://zalo.me/0859582982" target="_blank" class="btn btn-gold" style="text-decoration: none;">
+                        <i class="fa-solid fa-comment-dots"></i> Kết nối Zalo
+                    </a>
+                    <button type="button" id="leftDownloadBtn" class="btn btn-secondary" disabled>
+                        <i class="fa-solid fa-download"></i> Tải JPG
+                    </button>
+                    <button type="button" id="leftRegenerateBtn" class="btn btn-primary" disabled>
+                        <i class="fa-solid fa-rotate"></i> Tạo lại
+                    </button>
+                </div>
             </div>
             <span class="brand-tagline">Vũ khí định vị thương hiệu</span>
             <h2 class="hero-title">Thiết Kế Logo & <span>Bộ Nhận Diện</span> Chuyên Nghiệp</h2>
@@ -560,7 +664,7 @@
                 <div class="form-group">
                     <label for="geminiApiKey">Gemini API Key <span class="required">*</span></label>
                     <input type="password" id="geminiApiKey" class="form-input" placeholder="Dán Gemini API Key của bạn vào đây">
-                    <p class="form-footer-desc" style="margin-top: 8px;">Key được lưu trên máy bạn và dùng để gọi Gemini trực tiếp từ trình duyệt.</p>
+                    <p class="form-footer-desc" style="margin-top: 8px;">Chỉ dùng Gemini API Key từ Google AI Studio, không phải OpenAI key. Key được lưu trên máy bạn và gọi Gemini trực tiếp từ trình duyệt.</p>
                 </div>
                 
                 <!-- Row 1: Brand name & Slogan -->
@@ -679,6 +783,10 @@
     const downloadJpgBtn = document.getElementById('downloadJpgBtn');
     const regenerateBtn = document.getElementById('regenerateBtn');
     const geminiApiKeyInput = document.getElementById('geminiApiKey');
+    const liveLogoStage = document.getElementById('liveLogoStage');
+    const liveLogoOptions = document.getElementById('liveLogoOptions');
+    const leftDownloadBtn = document.getElementById('leftDownloadBtn');
+    const leftRegenerateBtn = document.getElementById('leftRegenerateBtn');
     
     // Details summary elements
     const sumLogoName = document.getElementById('sumLogoName');
@@ -696,7 +804,7 @@
         geminiApiKeyInput.value = savedGeminiApiKey;
     }
     if (geminiApiKeyInput) {
-        geminiApiKeyInput.addEventListener('change', () => {
+        geminiApiKeyInput.addEventListener('input', () => {
             localStorage.setItem(GEMINI_API_KEY_STORAGE, geminiApiKeyInput.value.trim());
         });
     }
@@ -763,14 +871,14 @@
             sumName.textContent = clientName;
             sumPhone.textContent = clientPhone;
             
-            // Display option cards
+            // Display option cards in the left live preview panel
             renderLogoOptions();
-            showModal(successModal);
             
         } catch (error) {
             hideModal(loadingModal);
             console.error("AI Generation Error:", error);
-            showFallbackMessage(error.message, logoName, slogan, ideas, clientName, clientPhone, clientEmail);
+            const errorMessage = formatGeminiErrorMessage(error.message);
+            showFallbackMessage(errorMessage, logoName, slogan, ideas, clientName, clientPhone, clientEmail);
         }
     }
 
@@ -826,12 +934,23 @@ YÊU CẦU BẮT BUỘC:
         const match = String(text).match(/<svg[\s\S]*?<\/svg>/i);
         return match ? match[0] : '';
     }
+
+    function formatGeminiErrorMessage(message) {
+        const rawMessage = String(message || '');
+        if (/api key not valid|invalid api key|permission denied|403|unauthorized/i.test(rawMessage)) {
+            return 'Gemini API Key không hợp lệ hoặc bị giới hạn. Hãy dùng key mới tạo từ Google AI Studio, bật quyền Gemini API và kiểm tra nếu có giới hạn domain/referrer.';
+        }
+        return rawMessage;
+    }
     
-    // Draw SVG logos onto the preview cards
+    // Draw SVG logos onto the live preview cards
     function renderLogoOptions() {
-        logoPreviewGrid.innerHTML = '';
+        if (liveLogoOptions) {
+            liveLogoOptions.innerHTML = '';
+        }
         selectedLogoIndex = 0;
         currentSvgCode = generatedLogos[0];
+        renderCurrentLogoIntoStage(generatedLogos[0]);
         
         generatedLogos.forEach((svg, index) => {
             const card = document.createElement('div');
@@ -861,40 +980,69 @@ YÊU CẦU BẮT BUỘC:
                 card.querySelector('.select-badge').style.display = 'inline';
                 selectedLogoIndex = index;
                 currentSvgCode = svg;
+                renderCurrentLogoIntoStage(svg);
             });
             
-            logoPreviewGrid.appendChild(card);
+            if (liveLogoOptions) {
+                liveLogoOptions.appendChild(card);
+            }
         });
         
-        downloadJpgBtn.style.display = 'inline-flex';
+        if (leftDownloadBtn) {
+            leftDownloadBtn.disabled = false;
+        }
+        if (leftRegenerateBtn) {
+            leftRegenerateBtn.disabled = false;
+        }
+        downloadJpgBtn.style.display = 'none';
+    }
+
+    function renderCurrentLogoIntoStage(svg) {
+        if (!liveLogoStage) return;
+        liveLogoStage.innerHTML = `
+            <div class="svg-wrapper" style="height: 100%; max-height: 500px;">
+                ${svg}
+            </div>
+        `;
     }
     
     // Fallback error handler (Submit leads even if Gemini is rate limited/failed)
     function showFallbackMessage(errorMsg, logoName, slogan, ideas, name, phone, email) {
-        logoPreviewGrid.innerHTML = `
+        if (liveLogoStage) {
+            liveLogoStage.innerHTML = `
             <div style="text-align: center; color: var(--text-muted); padding: 25px; grid-column: 1 / -1;">
                 <i class="fa-solid fa-circle-exclamation" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 12px;"></i>
                 <p style="font-weight: 700; color: var(--text-light); margin: 0 0 5px 0;">Không tạo được logo</p>
                 <p style="font-size: 0.85rem; line-height: 1.5; margin: 0;">${errorMsg}</p>
             </div>
-        `;
+            `;
+        }
+        if (liveLogoOptions) {
+            liveLogoOptions.innerHTML = '';
+        }
         
         sumLogoName.textContent = logoName;
         sumSlogan.textContent = slogan || 'Không có';
         sumName.textContent = name;
         sumPhone.textContent = phone;
         
+        if (leftDownloadBtn) {
+            leftDownloadBtn.disabled = true;
+        }
+        if (leftRegenerateBtn) {
+            leftRegenerateBtn.disabled = true;
+        }
         downloadJpgBtn.style.display = 'none';
-        showModal(successModal);
     }
     
-    // Download JPG trigger with Base64 rasterization and lead submission
-    downloadJpgBtn.addEventListener('click', () => {
+    function handleDownloadJpg() {
         if (!currentSvgCode) return;
         
         // Disable button while processing
-        downloadJpgBtn.disabled = true;
-        downloadJpgBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang nén...';
+        if (leftDownloadBtn) {
+            leftDownloadBtn.disabled = true;
+            leftDownloadBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang nén...';
+        }
         
         // Convert SVG code string to Base64 data URI
         const svgBlob = new Blob([currentSvgCode], { type: 'image/svg+xml;charset=utf-8' });
@@ -933,12 +1081,31 @@ YÊU CẦU BẮT BUỘC:
         };
         
         image.src = blobURL;
-    });
+    }
+
+    // Download JPG trigger with Base64 rasterization
+    if (leftDownloadBtn) {
+        leftDownloadBtn.addEventListener('click', handleDownloadJpg);
+    }
+    if (downloadJpgBtn) {
+        downloadJpgBtn.addEventListener('click', handleDownloadJpg);
+    }
+    if (leftRegenerateBtn) {
+        leftRegenerateBtn.addEventListener('click', async () => {
+            await generateLogo();
+        });
+    }
 
     // Restore button state after download
     function resetDownloadButton() {
-        downloadJpgBtn.disabled = false;
-        downloadJpgBtn.innerHTML = '<i class="fa-solid fa-download"></i> Tải xuống Logo (JPG)';
+        if (leftDownloadBtn) {
+            leftDownloadBtn.disabled = false;
+            leftDownloadBtn.innerHTML = '<i class="fa-solid fa-download"></i> Tải JPG';
+        }
+        if (downloadJpgBtn) {
+            downloadJpgBtn.disabled = false;
+            downloadJpgBtn.innerHTML = '<i class="fa-solid fa-download"></i> Tải xuống Logo (JPG)';
+        }
     }
     
     // Regenerate Btn Callback
